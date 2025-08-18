@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
-
-
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,4 +31,6 @@ Route::get('/post/{id?}', function (string $id = null) {
     }
 })->whereAlphaNumeric('id');
 
-Route::get('/user', [PageController::class, 'ShowUser']);
+// Route::get('/user', [PageController::class, 'ShowUser']);
+
+route::get('/', [UserController::class, 'show']);
