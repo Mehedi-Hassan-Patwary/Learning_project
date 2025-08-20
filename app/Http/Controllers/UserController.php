@@ -18,9 +18,15 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function updateUser(Request $request, string $id)
     {
-        //
+        $user = DB::table('users')->where('id', $id)->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'age' => $request->input('age'),
+            'city' => $request->input('city'),
+        ]);
+        return redirect('/')->with('success', 'User updated successfully');
     }
 
     /**
@@ -43,28 +49,48 @@ class UserController extends Controller
         return view('allusers', ['data' => $users]);
 
     }
+        public function singleUser(string $id)
+            {
+                $users = DB::table('users')->where('id', $id)->get();
+                return  view('user', ['data' => $users]);
+            }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function addUser(Request $request)
     {
-        //
+        $users = DB::table('users')
+                        ->insert([
+                            'name' => $request->input('name'),
+                            'email' => $request->input('email'),
+                            'age' => $request->input('age'),
+                            'city' => $request->input('city'),
+
+                        ]);
     }
+
+
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updatePage( string $id)
     {
-        //
+        //$user = DB::table('users')->where('id', $id)->get();
+        $user = DB::table('users')->find($id);
+         return view('updateuser', ['data' => $user]);
+        //return $user;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function deleteUser(string $id)
     {
-        //
+        $user = DB::table('users')->where('id', $id)->delete();
+
+        return redirect()->back()->with('success', 'User deleted successfully');
     }
 }

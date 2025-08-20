@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 // Route::get('/post', function () {
 //     return view('post');
 // });
@@ -23,14 +23,21 @@ Route::get('/', function () {
 
 // });
 
-Route::get('/post/{id?}', function (string $id = null) {
-    if($id){
-        return "<h1>Post ID : ".$id ."</h1>";
-    }else{
-        return "<h1>Post ID not found</h1>";
-    }
-})->whereAlphaNumeric('id');
+// Route::get('/post/{id?}', function (string $id = null) {
+//     if($id){
+//         return "<h1>Post ID : ".$id ."</h1>";
+//     }else{
+//         return "<h1>Post ID not found</h1>";
+//     }
+// })->whereAlphaNumeric('id');
 
 // Route::get('/user', [PageController::class, 'ShowUser']);
 
 route::get('/', [UserController::class, 'show']);
+route::get('/users/{id}', [UserController::class, 'singleUser'])->name('view.user');
+route::post('/add', [UserController::class, 'addUser'])->name('addUser');
+route::get('/delete/{id}', [UserController::class, 'deleteUser'])->name('delete.user');
+route::view('newuser', '/adduser');
+Route::post('/update/{id}', [UserController::class, 'updateUser'])->name('update.user');
+route::get('/updatepage/{id}', [UserController::class, 'updatePage'])->name('update.page');
+
