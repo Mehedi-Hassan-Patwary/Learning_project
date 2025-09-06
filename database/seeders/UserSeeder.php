@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Faker\Core\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        $json=File::get(path :'database/seeders/data.json');
+        $json = File::get(database_path('seeders/data.json'));
         $users=collect(json_decode($json, true));
 
         foreach ($users as $user) {

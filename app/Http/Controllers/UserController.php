@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function show()
     {
-        $users =DB::table('users')->get();
+        $users =DB::table('users')->simplePaginate(3);
         // return $users;
         //dd($users);
         // return view('user.show', compact('users'));
